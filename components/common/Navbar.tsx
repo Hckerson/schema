@@ -89,7 +89,7 @@ export default function Navbar() {
                   <span className="sr-only">Toggle menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent className="w-[240px] sm:w-[300px]">
+              <SheetContent className="w-[240px] sm:w-[300px]"  asChild>
                 <div className="flex flex-col space-y-4 mt-8">
                   {navLinks.map((link) => (
                     <Link
