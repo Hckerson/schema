@@ -19,27 +19,27 @@ export async function signUp(formData: {
   const status = "unverified";
   const isLocal = true;
 
-  try {
-    const [client] = await prisma.user.createManyAndReturn({
-      data: {
-        email: formData.email,
-        password: hashedPassword,
-        username: formData.username,
-        phone: phoneNumber,
-        status: status,
-        localStatus: isLocal,
-      },
-    });
-    const { email: returnedEmail, id } = client;
-    console.log(returnedEmail, id);
-    const result = await verifyMail(returnedEmail, id);
-    if (result?.status === 200) {
-      return { message: "done", status: 200 };
-    } else {
-      return { message: "failed", status: 500 };
-    }
-  } catch (error) {
-    console.error("Error registering user", error);
-    return { message: "failed", status: 500 };
-  }
+  // try {
+  //   const [client] = await prisma.user.createManyAndReturn({
+  //     data: {
+  //       email: formData.email,
+  //       password: hashedPassword,
+  //       username: formData.username,
+  //       phone: phoneNumber,
+  //       status: status,
+  //       localStatus: isLocal,
+  //     },
+  //   });
+  //   const { email: returnedEmail, id } = client;
+  //   console.log(returnedEmail, id);
+  //   const result = await verifyMail(returnedEmail, id);
+  //   if (result?.status === 200) {
+  //     return { message: "done", status: 200 };
+  //   } else {
+  //     return { message: "failed", status: 500 };
+  //   }
+  // } catch (error) {
+  //   console.error("Error registering user", error);
+  //   return { message: "failed", status: 500 };
+  // }
 }
