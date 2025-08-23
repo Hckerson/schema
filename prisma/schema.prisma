@@ -5,11 +5,87 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../lib/generated/prisma"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+enum Role {
+  GUEST
+  ADMIN
+  MANAGER
+  STAFF
+}
+
+enum Permission {
+  CREATE
+  READ
+  UPDATE
+  DELETE
+}
+
+enum RoomType {
+  DELUXE
+  OCEAN_VIEW
+  EXECUTIVE
+  PRESIDENTIAL
+  JUNIOR
+  FAMILY
+}
+
+enum Status {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Guest {
+  id          String    @id @default(uuid())
+  email       String    @unique
+  password    String?
+  provider    String?
+  username    String?
+  status      String    @default("unverified")
+  localStatus Boolean   @default(true)
+  phone       String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  avatar      Avatar[]
+  role        Role      @default(GUEST)
+  sessions    Session[]
+}
+
+model Bookings {
+  id           String   @id @default(uuid())
+  guestId      String
+  checkInDate  DateTime @default(now())
+  checkoutDate DateTime
+  roomType     RoomType
+  adult        String
+  childeren    String
+}
+
+model Avatar {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      Guest    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  image     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Session {
+  id         String   @id @default(uuid())
+  userId     String
+  expires    DateTime
+  otpEnabled Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       Guest    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([id, userId])
 }
