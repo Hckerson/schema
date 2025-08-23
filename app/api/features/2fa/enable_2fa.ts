@@ -13,13 +13,13 @@ export async function generateSecret() {
 export async function enable2FA(userId: string, email: string) {
   try {
     // const isValid = totp.check(token, secret);
-    await prisma.session.create({
-      data: {
-        userId: userId,
-        otpEnabled: true,
-        expires: new Date(Date.now() + 720 * 3600 * 1000),
-      },
-    });
+    // await prisma.session.create({
+    //   data: {
+    //     userId: userId,
+    //     otpEnabled: true,
+    //     expires: new Date(Date.now() + 720 * 3600 * 1000),
+    //   },
+    // });
     return { success: true, message: "2FA enabled successfully" };
   } catch (error) {
     console.log(error);

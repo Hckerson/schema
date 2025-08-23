@@ -9,12 +9,12 @@ export async function GET(request: Request) {
   }
 
   try {
-    const deleted = await prisma.session.deleteMany({
-      where: {
-        expires: { lt: new Date() },
-      },
-    });
-    console.log(deleted);
+    // const deleted = await prisma.session.deleteMany({
+    //   where: {
+    //     expires: { lt: new Date() },
+    //   },
+    // });
+    // console.log(deleted);
   } catch (error) {
     console.error("Failed to delete expired sessions", error);
   }

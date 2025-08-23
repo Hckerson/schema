@@ -9,13 +9,13 @@ export async function GET(request: Request) {
   }
 
   try {
-    const deleted = await prisma.user.deleteMany({
-      where: {
-        status: "unverified",
-        createdAt: { lt: new Date(Date.now() - 86400000) },
-      },
-    });
-    console.log(deleted);
+    // const deleted = await prisma.user.deleteMany({
+    //   where: {
+    //     status: "unverified",
+    //     createdAt: { lt: new Date(Date.now() - 86400000) },
+    //   },
+    // });
+    // console.log(deleted);
   } catch (error) {
     console.error("Failed to delete unverified users", error);
   }
