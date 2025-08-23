@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 
 export default function NewsletterSignup() {
@@ -54,9 +53,9 @@ export default function NewsletterSignup() {
     return (
       <div className="text-center p-6 bg-primary/10 rounded-xl border border-primary/20">
         <CheckCircle className="h-12 w-12 text-primary mx-auto mb-3" />
-        <h3 className="font-semibold text-lg mb-2">You're all set!</h3>
+        <h3 className="font-semibold text-lg mb-2">{`You're all set!`}</h3>
         <p className="text-sm text-muted-foreground">
-          Thank you for subscribing. You'll receive our next newsletter soon.
+          {`Thank you for subscribing. You'll receive our next newsletter soon.`}
         </p>
       </div>
     );
@@ -65,7 +64,7 @@ export default function NewsletterSignup() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="flex flex-col sm:flex-row gap-3">
-        <Input
+        <input
           type="email"
           placeholder="Enter your email address"
           value={email}
