@@ -3,23 +3,22 @@
 import { useState } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/hooks/use-toast';
+import { Toaster } from 'sonner';
 
 export default function NewsletterSignup() {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!email || !email.includes('@')) {
-      toast({
-        variant: "destructive",
-        title: "Invalid email",
-        description: "Please enter a valid email address.",
-      });
+      // toast({
+      //   variant: "destructive",
+      //   title: "Invalid email",
+      //   description: "Please enter a valid email address.",
+      // });
       return;
     }
     
@@ -34,16 +33,16 @@ export default function NewsletterSignup() {
       
       setIsSubscribed(true);
       setEmail('');
-      toast({
-        title: "Welcome aboard!",
-        description: "You've been successfully subscribed to our newsletter.",
-      });
+      // toast({
+      //   title: "Welcome aboard!",
+      //   description: "You've been successfully subscribed to our newsletter.",
+      // });
     } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Subscription failed",
-        description: "Something went wrong. Please try again.",
-      });
+      // toast({
+      //   variant: "destructive",
+      //   title: "Subscription failed",
+      //   description: "Something went wrong. Please try again.",
+      // });
     } finally {
       setIsLoading(false);
     }
