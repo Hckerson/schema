@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { SheetPortal } from '@/components/ui/sheet';
 import {
   Sheet,
   SheetContent,
@@ -89,29 +90,31 @@ export default function Navbar() {
                   <span className="sr-only">Toggle menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent className="w-[240px] sm:w-[300px]"  asChild>
-                <div className="flex flex-col space-y-4 mt-8">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={`px-3 py-2 text-lg rounded-md transition-colors ${
-                        pathname === link.href
-                          ? 'text-accent font-medium'
-                          : 'text-foreground/80'
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                  <Button asChild className="mt-4">
-                    <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                      Contact
-                    </Link>
-                  </Button>
-                </div>
-              </SheetContent>
+              <SheetPortal>
+                <SheetContent className="w-[240px] sm:w-[300px]">
+                  <div className="flex flex-col space-y-4 mt-8">
+                    {navLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`px-3 py-2 text-lg rounded-md transition-colors ${
+                          pathname === link.href
+                            ? 'text-accent font-medium'
+                            : 'text-foreground/80'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                    <Button asChild className="mt-4">
+                      <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                        Contact
+                      </Link>
+                    </Button>
+                  </div>
+                </SheetContent>
+              </SheetPortal>
             </Sheet>
           </div>
         </div>
